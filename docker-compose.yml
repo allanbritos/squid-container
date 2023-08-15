@@ -1,0 +1,31 @@
+version: "3"
+services:
+  proxy:
+    image: ubuntu/squid
+    ports:
+      - 3128:3128
+    volumes:
+      - mnt-log:/var/log/squid
+      - mnt-spool:/var/spool/squid
+      - mnt-conf:/etc/squid
+    restart: always
+volumes:
+  mnt-log:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $PWD/data/log/
+  mnt-spool:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $PWD/data/spool/
+  mnt-conf:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $PWD/data/conf/
+  
